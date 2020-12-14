@@ -9,7 +9,7 @@ It downloads the page via `urllib` and formats (prettifies) it via `BeautifulSou
 2. Edit your sieve-extprograms.conf to specify where to find the filter program:
 
 /etc/dovecot/conf.d/90-sieve-extprograms.conf: 
-```json
+```aconf
 plugin {
   sieve_extensions = +vnd.dovecot.filter
 
