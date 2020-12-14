@@ -32,9 +32,16 @@ def filter_email(eml: email.message.EmailMessage) -> str:
 
     url: str = urls[0][0]
 
+    # Some sites require this header
+    headers = {
+        'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
+    }
+
     # Download the contents at that URL with urllib
-    with urllib.request.urlopen(url) as req:
-        webpage = req.read()
+    request = urllib.request.Request(url, headers=headers)
+    with urllib.request.urlopen(request) as response:
+        webpage = response.read()
 
         # Parse with BeautifulSoup
         bs = BeautifulSoup(webpage, features='lxml')
